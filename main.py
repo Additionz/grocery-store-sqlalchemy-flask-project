@@ -5,7 +5,7 @@ from models import Product, Base, Category, Customer
 from sqlalchemy import select
 
 
-def main(query: str):
+def main(query: str) -> None:
     match query.lower():
         case "create":
             create_database()
@@ -16,7 +16,7 @@ def main(query: str):
         case _:
             print("Enter a valid CLI. (Create/Drop/Import)")
 
-def drop_database():
+def drop_database() -> None:
     try: 
         Base.metadata.drop_all(engine)
         print("All tables dropped!")
@@ -24,14 +24,14 @@ def drop_database():
         print(err)
     
 
-def create_database():
+def create_database() -> None:
     try:
         Base.metadata.create_all(engine)
         print("Created all tables!")
     except(Exception) as err:
         print(err)
 
-def import_data():
+def import_data() -> None:
     # Importing products.csv file
     with open("products.csv") as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
