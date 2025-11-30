@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block title %}Homepage{% endblock %}
+{% block content %} 
+<h1>Homepage</h1>
+<p><a href="{{ url_for('product') }}">Go to Products</a></p>
+<p><a href="{{ url_for('category') }}">Go to Categories</a></p>
+<p><a href="{{ url_for('customer') }}">Go to Customers</a></p>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Customers{% endblock %}
+{% block content %}
+<a href="{{ url_for('home')}}">Back to Homepage</a>
+<form method="POST" action="{{ url_for('customer') }}">
+    <label for="id">Search Customer by ID</label>
+    <input type="text" id="id" name="id" text="Search Customer by ID">
+    <button type="Submit">Search</button>
+</form>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Phone Number</th>
+    </tr>
+    {% for customer in customers %}
+        <tr>
+            <td>{{ customer.id }}</td>
+            <td>{{ customer.name }}</td>
+            <td>{{ customer.phone_number }}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}
