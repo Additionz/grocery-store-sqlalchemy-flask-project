@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %}Orders{% endblock %}
+{% block content %}
+<p><a href="{{ url_for('home')}}">Return to Homepage</a></p>
+{% if productorders %}
+<p><a href="{{ url_for('order')}}">Back to Orders</a></p>
+<table>
+    <tr>
+        <th>Product Id: {{ id }}</th>
+        <th>Customer: <a href="{{ url_for('customer_detail', id=productorders[0].order.customer.id) }}">{{ productorders[0].order.customer.name }}</a></th>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+        </tr>
+        {% for order in productorders %}
+            <tr>
+                <td>{{ order.product.name }}</td>
+                <td>{{ order.check() }}</td>
+                <td>{{ order.product.price }}</td>
+            </tr>
+        {% endfor %}
+    </tr>
+</table>
+<p><b>Estimated Total: {{ productorders[0].order.estimate() }}</b></p>
+<form method="POST" action="{{ url_for('complete_order', id=id) }}">
+    <button type="Submit">Complete Order</button>
+</form>
+{% else %}
+<table>
+    <tr><th>Completed Orders</th></tr>
+    <tr>
+        <th>Id</th>
+        <th>Created</th>
+        <th>Completed</th>
+        <th>Total Amount</th>
+        <th>Customer</th>
+    </tr>
+    {% for order in complete_orders %}
+        <tr>
+            <td>{{ order.id }}</a></td>
+            <td>{{ order.created }}</td>
+            <td>{{ order.completed }}</td>
+            <td>{{ order.amount }}</td>
+            <td>{{ order.customer.name }}</td>
+        </tr>
+    {% endfor %}
+</table>
+<table>
+    <tr><th>Pending Orders</th></tr>
+    <tr>
+        <th>Id</th>
+        <th>Created</th>
+        <th>Customer</th>
+    </tr>
+    {% for order in orders %}
+        <tr>
+            <td><a href="{{ url_for('order_detail', id=order.id) }}">{{ order.id }}</a></td>
+            <td>{{ order.created }}</td>
+            <td>{{ order.customer.name }}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% endif %}
+{% endblock %}

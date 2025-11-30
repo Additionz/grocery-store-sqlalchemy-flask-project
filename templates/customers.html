@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block pagetitle %}Customers{% endblock %}
+{% block content %}
+<p><a href="{{ url_for('home') }}">Return to Homepage</a></p>
+<form method="POST" action="{{ url_for('customer') }}">
+    <label for="id">Search Customer by Id</label>
+    <input type="text" id="id" name="id" text="Search Customer by ID">
+    <button type="Submit">Search</button>
+</form>
+{% if indiv_customer %}
+<p><a href="{{ url_for('customer') }}">Reset Search</a></p>
+<table>
+    <tr><th>Customer</th></tr>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Phone Number</th>
+    </tr>
+    <tr>
+        <td>{{ indiv_customer.id }}</td>
+        <td>{{ indiv_customer.name }}</td>
+        <td>{{ indiv_customer.phone_number }}</td>
+    </tr>
+</table>
+<table>
+    <tr><th>Pending Orders</th></tr>
+    <tr>
+        <th>Id</th>
+        <th>Status</th>
+    </tr>
+    {% for pending in indiv_customer.list_orders()[1] %}
+        <tr>
+            <td><a href="{{ url_for('order_detail', id=pending.id) }}">{{ pending.id }}</a></td>
+            <td>{{ pending.completed }}</td>
+        </tr>
+    {% endfor %}
+</table>
+<table>
+    <tr><th>Finished Orders</th></tr>
+    <tr>
+        <th>Id</th>
+        <th>Completed</th>
+        <th>Total Amount</th>
+    </tr>
+    {% for complete in indiv_customer.list_orders()[0] %}
+        <tr>
+            <td><a href="{{ url_for('order_detail', id=complete.id) }}">{{ complete.id }}</a></td>
+            <td>{{ complete.completed }}</td>
+            <td>{{ complete.amount }}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% else %}
+<table>
+    <tr><th>Customers</th></tr>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Phone Number</th>
+    </tr>
+    {% for customer in customers %}
+        <tr>
+            <td>{{ customer.id }}</td>
+            <td>{{ customer.name }}</td>
+            <td>{{ customer.phone_number }}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% endif %}
+{% endblock %}

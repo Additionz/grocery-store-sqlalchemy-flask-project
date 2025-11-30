@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block pagetitle %}404 Error{% endblock %}
+{% block content %}
+<p>An error has occured: {{ message }}</p>
+<p><a href="{{ url_for('home') }}">Return to Homepage</a></p>
+{% endblock %}

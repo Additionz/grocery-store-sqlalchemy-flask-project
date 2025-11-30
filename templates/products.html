@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block pagetitle %}Products{% endblock %}
+{% block content %}
+<a href="{{ url_for('home') }}">Return to Homepage</a>
+{% if name %}
+<p><a href="{{ url_for('category') }}">Back to Categories</a></p>
+{% endif %}
+<table>
+    <tr><th>Products</th></tr>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Inventory</th>
+    </tr>
+    {% for product in products %}
+        <tr>
+            <td>{{ product.id }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.inventory }}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}

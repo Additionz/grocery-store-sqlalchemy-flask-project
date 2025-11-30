@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block pagetitle %}Categories{% endblock %}
+{% block content %}
+<a href="{{ url_for('home') }}">Return to Homepage</a>
+<table>
+    <tr><th>Categories</th></tr>
+    <tr>
+        <th>Id</th>
+        <th>Category</th>
+    </tr>
+    {% for category in categories %}
+        <tr>
+            <td>{{ category.id }}</td>
+            <td><a href="{{ url_for('category_detail', name=category.name) }}">{{ category.name }}</a></td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}
