@@ -1,2 +1,2 @@
-# sqlalchemy-flask-project
-acit2515 sqlalchemy flask project
+# grocery-store-project
+programmed in python using sqlalchemy and flask
